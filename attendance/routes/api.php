@@ -32,6 +32,9 @@ Route::get('/desks/{id}', [DeskController::class, 'show']);
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{id}', [CategoryController::class, 'show']);
 
+Route::get('/events', [EventController::class, 'index']);
+Route::get('/events/{id}', [EventController::class, 'show']);
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -45,6 +48,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::resource('/categories', CategoryController::class)
         ->only(['store', 'update', 'destroy']);
-
+    
+    Route::resource('/events', EventController::class)
+        ->only(['store', 'update', 'destroy']);
+        
     Route::post('/logout', [AuthController::class, 'logout']);
 });
