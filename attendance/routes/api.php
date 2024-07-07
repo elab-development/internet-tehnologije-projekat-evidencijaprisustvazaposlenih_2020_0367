@@ -26,6 +26,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/users/{id}', [UserController::class, 'show']);
 
+Route::get('/desks', [DeskController::class, 'index']);
+Route::get('/desks/{id}', [DeskController::class, 'show']);
+
 Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/categories/{id}', [CategoryController::class, 'show']);
 
@@ -36,6 +39,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function (Request $request) {
         return auth()->user();
     });
+
+    Route::resource('/desks', DeskController::class)
+        ->only(['store', 'update', 'destroy']);
 
     Route::resource('/categories', CategoryController::class)
         ->only(['store', 'update', 'destroy']);
