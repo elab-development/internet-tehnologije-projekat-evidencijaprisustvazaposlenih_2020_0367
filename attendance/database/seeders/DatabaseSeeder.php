@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\Desk;
+use App\Models\Event;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +15,34 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::truncate();
+        Desk::truncate();
+        Category::truncate();
+        Event::truncate();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        Desk::factory(10)->has(User::factory(10))->create();
+        Category::factory(10)->create();
+
+        Event::factory()->create([
+            "user_id" => 1,
+            "category_id" => 1,
+        ]);
+        Event::factory()->create([
+            "user_id" => 2,
+            "category_id" => 2,
+        ]);
+        Event::factory()->create([
+            "user_id" => 3,
+            "category_id" => 3,
+        ]);
+        Event::factory()->create([
+            "user_id" => 4,
+            "category_id" => 4,
+        ]);
+        Event::factory()->create([
+            "user_id" => 5,
+            "category_id" => 5,
         ]);
     }
-}
+    }
+
